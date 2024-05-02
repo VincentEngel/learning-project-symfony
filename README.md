@@ -1,4 +1,4 @@
-# learning-project-twitter
+# Learning Project
 
 # Setup
 1. docker compose up
