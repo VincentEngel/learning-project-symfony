@@ -1,0 +1,6 @@
+log_errors = On
+error_reporting = E_ALL
+
+xdebug.mode = debug
+xdebug.client_host=host.docker.internal
+xdebug.idekey = PHPSTORM
