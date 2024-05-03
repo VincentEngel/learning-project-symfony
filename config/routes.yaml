@@ -9,3 +9,9 @@ controllers_post_frontend:
         path: ../src/Post/Port/Frontend/Controller/
         namespace: App\Post\Port\Frontend\Controller
     type: attribute
+
+controllers_post_api:
+  resource:
+    path: ../src/Post/Port/Api/Controller/
+    namespace: App\Post\Port\Api\Controller
+  type: attribute

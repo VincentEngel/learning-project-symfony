@@ -23,15 +23,6 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Post\Port\Frontend\Controller\:
-        resource: '%kernel.project_dir%/src/Post/Port/Frontend/Controller/'
-        tags: [ 'controller.service_arguments' ]
-
-    App\Shared\Port\Frontend\Controller\:
-        resource: '%kernel.project_dir%/src/Shared/Port/Frontend/Controller/'
-        tags: [ 'controller.service_arguments' ]
-
-
     # Messenger Bus
     App\Shared\Port\Bus\Query\SymfonyQueryBus:
         arguments:

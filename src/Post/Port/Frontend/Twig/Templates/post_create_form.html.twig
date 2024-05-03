@@ -1,0 +1,14 @@
+{% extends '@shared/base.html.twig' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block body %}
+    <h1>Create a new Post</h1>
+
+    <form action="{{ url('post.create') }}" method="post">
+        <label for="content">Your Text:</label><br>
+        <input type="text" id="content" name="content"><br>
+        <input type="submit" value="Create Post">
+    </form>
+
+{% endblock %}
