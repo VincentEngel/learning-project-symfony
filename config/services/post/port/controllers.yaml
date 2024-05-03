@@ -1,8 +1,0 @@
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-
-  App\Post\Port\Frontend\Controller\:
-    resource: '%kernel.project_dir%/src/Post/Port/Frontend/Controller/'
-    tags: [ 'controller.service_arguments' ]
