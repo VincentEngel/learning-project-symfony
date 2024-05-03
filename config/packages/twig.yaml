@@ -1,6 +1,6 @@
 twig:
     file_name_pattern: '*.twig'
-    default_path: '%kernel.project_dir%/twig/templates'
+    default_path: '%kernel.project_dir%/src/Port/Frontend/Twig/Templates'
 
 when@test:
     twig:
