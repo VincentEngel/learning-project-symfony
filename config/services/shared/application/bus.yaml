@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  _instanceof:
+    App\Shared\Application\Bus\Command\CommandHandler:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
+    App\Shared\Application\Bus\Query\QueryHandler:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
