@@ -1,0 +1,4 @@
+doctrine_migrations:
+  migrations_paths:
+    'App\Post\Port\Persistence\Migrations': '%kernel.project_dir%/src/Post/Port/Persistence/Migrations'
+#    'App\Shared\Port\Persistence\Migrations': '%kernel.project_dir%/src/Shared/Port/Persistence/Migrations'

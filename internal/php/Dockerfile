@@ -12,6 +12,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN pecl install xdebug-3.3.2
 RUN docker-php-ext-enable  xdebug
 
+RUN docker-php-ext-install pdo pdo_mysql
+
 # Required for composer installs
 RUN apt-get install -y libzip-dev \
     zip \

@@ -1,8 +1,10 @@
 # Learning Project
 
 # Setup
-1. docker compose up
-2. Open http://localhost/ in your browser
+1. Copy internal/php/custom.php.ini.dist to internal/php/custom.php.ini
+2. Copy .env.local.dist to .env.local
+3. Run docker compose up
+4. Open http://localhost/ in your browser
 
 
 # Debug

@@ -1,0 +1,17 @@
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        driver: pdo_mysql
+        server_version: 8.4.0
+        charset: utf8mb4
+        dbname: lps
+        user: development
+        password: development
+        host: db
+        port: 3306
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode
+            collation: utf8mb4_unicode
