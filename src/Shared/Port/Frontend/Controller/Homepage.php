@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Port\Frontend\Controller;
+namespace App\Shared\Port\Frontend\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +12,6 @@ class Homepage extends AbstractController
     #[Route('/', name: 'homepage')]
     public function homepage(): Response
     {
-        return $this->render('homepage.html.twig');
+        return $this->render('@shared/homepage.html.twig');
     }
 }

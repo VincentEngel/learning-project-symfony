@@ -1,5 +1,11 @@
-controllers:
+controllers_shared_frontend:
+  resource:
+    path: ../src/Shared/Port/Frontend/Controller/
+    namespace: App\Shared\Port\Frontend\Controller
+  type: attribute
+
+controllers_post_frontend:
     resource:
-        path: ../src/Port/Frontend/Controller/
-        namespace: App\Port\Frontend\Controller
+        path: ../src/Post/Port/Frontend/Controller/
+        namespace: App\Post\Port\Frontend\Controller
     type: attribute

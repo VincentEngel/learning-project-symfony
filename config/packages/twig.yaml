@@ -1,6 +1,8 @@
 twig:
     file_name_pattern: '*.twig'
-    default_path: '%kernel.project_dir%/src/Port/Frontend/Twig/Templates'
+    paths:
+        'src/Shared/Port/Frontend/Twig/Templates': 'shared'
+        'src/Post/Port/Frontend/Twig/Templates': 'post'
 
 when@test:
     twig:
