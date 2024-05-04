@@ -13,5 +13,12 @@ In Settings -> PHP -> CLI Interpreter, add Docker Server
 In Settings -> PHP -> Servers, add localhost with port 80 and absolute path /var/www/project
 
 # PHP Code Sniffer and Beautifier
+https://github.com/PHPCSStandards/PHP_CodeSniffer/
+
 1. ./vendor/bin/phpcs
 2. ./vendor/bin/phpcbf
+
+# Psalm
+https://github.com/vimeo/psalm/
+
+./vendor/bin/psalm
