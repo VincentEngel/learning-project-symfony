@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject;
 
+use App\Shared\Domain\Exceptions\InvalidUuidException;
 use Symfony\Component\Uid\Uuid as SymfonyUuid;
 
 readonly class Uuid extends StringValueObject
@@ -26,7 +27,8 @@ readonly class Uuid extends StringValueObject
 
     public function guardAgainstInvalidUuid(string $value): void
     {
-        SymfonyUuid::isValid($value);
-        // Add Exception
+        if (!SymfonyUuid::isValid($value)) {
+            throw InvalidUuidException::fromUuid($value);
+        }
     }
 }

@@ -27,3 +27,8 @@ https://github.com/vimeo/psalm/
 https://github.com/phpstan/phpstan
 
 vendor/bin/phpstan analyse src tests
+
+# PHP Unit
+https://github.com/sebastianbergmann/phpunit/
+
+./vendor/bin/phpunit --testdox tests
