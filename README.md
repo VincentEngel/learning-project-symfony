@@ -22,3 +22,8 @@ https://github.com/PHPCSStandards/PHP_CodeSniffer/
 https://github.com/vimeo/psalm/
 
 ./vendor/bin/psalm
+
+# PHPStan
+https://github.com/phpstan/phpstan
+
+vendor/bin/phpstan analyse src tests
