@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Post\Port\Frontend\Controller;
@@ -23,12 +24,8 @@ class CreatePostController extends AbstractController
     {
         $command = new CreatePostCommand(content: $request->getPayload()->get('content'));
         $commandBus->dispatch($command);
-
-        return $this->redirectToRoute(
-            'post.show',
-            [
+        return $this->redirectToRoute('post.show', [
                 'id' => $command->id,
-            ],
-        );
+            ],);
     }
 }

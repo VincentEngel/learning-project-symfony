@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Post\Application\UseCase\CreatePost;
@@ -14,11 +15,8 @@ final class CreatePostCommandHandler implements CommandHandler
 
     public function __invoke(CreatePostCommand $command): void
     {
-        $post = $this->createPost->__invoke(
-            new PostContent($command->content)
-        );
-
-        // Can be avoided if the command passes an id instead
+        $post = $this->createPost->__invoke(new PostContent($command->content));
+// Can be avoided if the command passes an id instead
         $command->id = $post->getId()->toPrimitive();
     }
 }

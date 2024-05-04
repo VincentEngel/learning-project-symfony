@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Shared\Port\Bus\Command;
@@ -11,6 +12,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class SymfonyCommandBus implements CommandBus
 {
     use HandleTrait;
+
 
     public function __construct(MessageBusInterface $messageBus)
     {

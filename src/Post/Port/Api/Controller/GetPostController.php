@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Post\Port\Api\Controller;
@@ -17,7 +18,6 @@ class GetPostController extends AbstractController
     {
         /** @var GetPostQueryResponse $response */
         $response = $queryBus->ask(new GetPostQuery(id: 'some_uuid'));
-
         return $this->json([
             'id' => $response->id,
             'content' => $response->content,

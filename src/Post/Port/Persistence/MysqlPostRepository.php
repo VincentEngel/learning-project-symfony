@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Post\Port\Persistence;
@@ -12,7 +13,6 @@ use Doctrine\DBAL\Connection;
 class MysqlPostRepository implements PostRepository
 {
     public const TABLE_NAME = 'posts';
-
     public function __construct(private readonly Connection $connection)
     {
     }
@@ -30,7 +30,6 @@ class MysqlPostRepository implements PostRepository
                 'id' => $post->getId()->toPrimitive(),
                 'content' => $post->getContent()->value(),
             ]);
-
         $queryBuilder->executeStatement();
     }
 
@@ -42,15 +41,11 @@ class MysqlPostRepository implements PostRepository
             ->from(self::TABLE_NAME)
             ->where('id = :id')
             ->setParameter('id', $postId->toPrimitive());
-
         $result = $queryBuilder->executeQuery()->fetchAssociative();
         if ($result === false) {
             return null;
         }
 
-        return new Post(
-            new PostId($result['id']),
-            new PostContent($result['content']),
-        );
+        return new Post(new PostId($result['id']), new PostContent($result['content']),);
     }
 }

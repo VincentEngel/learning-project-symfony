@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Post\Application\UseCase\CreatePost;
@@ -15,9 +16,7 @@ final readonly class CreatePost
     public function __invoke(PostContent $content): Post
     {
         $post = Post::createFromContent($content);
-
         $this->postRepository->save($post);
-
         return $post;
     }
 }

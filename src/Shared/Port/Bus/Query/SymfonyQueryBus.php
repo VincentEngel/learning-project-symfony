@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Shared\Port\Bus\Query;
@@ -12,6 +13,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class SymfonyQueryBus implements QueryBus
 {
     use HandleTrait;
+
 
     public function __construct(MessageBusInterface $messageBus)
     {

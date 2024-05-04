@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Post\Application\UseCase\GetPost;
@@ -14,8 +15,6 @@ final readonly class GetPostQueryHandler implements QueryHandler
     }
     public function __invoke(GetPostQuery $query): GetPostQueryResponse
     {
-        return GetPostQueryResponse::fromPost(
-            $this->getPost->__invoke(new PostId($query->id))
-        );
+        return GetPostQueryResponse::fromPost($this->getPost->__invoke(new PostId($query->id)));
     }
 }

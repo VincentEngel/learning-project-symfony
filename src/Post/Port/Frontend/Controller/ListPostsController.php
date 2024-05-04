@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Post\Port\Frontend\Controller;
@@ -17,7 +18,6 @@ class ListPostsController extends AbstractController
     {
         /** @var ListPostsQueryResponse $response */
         $response = $queryBus->ask(new ListPostsQuery());
-
         return $this->render('@post/list_posts.html.twig');
     }
 }
