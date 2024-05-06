@@ -1,0 +1,12 @@
+services:
+  nginx:
+    platform: linux/amd64
+
+  db:
+    platform: linux/amd64
+    volumes:
+      - db:/var/lib/mysql:rw
+    user: mysql
+
+volumes:
+  db:
