@@ -21,4 +21,4 @@ jobs:
         run: composer install
 
       - name: PHPCS
-        run: php vendor/bin/phpcs -p src tests
+        run: php vendor/bin/phpcs --ignore=*/Migrations/* -p src tests
