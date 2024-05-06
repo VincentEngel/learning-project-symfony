@@ -2,8 +2,7 @@ services:
   php:
     build:
       dockerfile: internal/php/Dockerfile
-    expose:
-      - 9000
+      target: development
     env_file:
       - .env
     volumes:

@@ -10,7 +10,12 @@
 # Debug
 In Settings -> PHP -> CLI Interpreter, add Docker Server
 
-In Settings -> PHP -> Servers, add localhost with port 80 and absolute path /var/www/project
+In Settings -> PHP -> Servers, add localhost with port 80 and absolute path /var/www/project use name=phpproject
+
+In order to debug tests and cli commands prefix your request with XDEBUG_TRIGGER=yes
+
+e.g. XDEBUG_TRIGGER=yes php bin/phpunit
+
 
 # PHP Code Sniffer and Beautifier
 https://github.com/PHPCSStandards/PHP_CodeSniffer/
