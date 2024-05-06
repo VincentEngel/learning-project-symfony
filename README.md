@@ -31,4 +31,5 @@ php vendor/bin/phpstan analyse src tests
 # PHP Unit
 https://github.com/sebastianbergmann/phpunit/
 
-php vendor/bin/phpunit --testdox tests/Unit
+1. APP_ENV=test vendor/bin/phpunit --testdox tests/Unit
+2. APP_ENV=test vendor/bin/phpunit --testdox tests/Integration

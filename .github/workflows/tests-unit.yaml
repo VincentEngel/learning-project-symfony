@@ -1,4 +1,4 @@
-name: Validate Coding Standards
+name: Run Unit Tests
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  validate-code-standards:
+  run-unit-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,8 +21,8 @@ jobs:
       - name: Install Dependencies
         run: docker compose exec -it php composer install
 
-      - name: PHPCS
-        run: docker compose exec -it php php vendor/bin/phpcs --ignore=*/Migrations/* -p src tests
+      - name: Run Unit Tests
+        run: docker compose exec -it php php bin/phpunit --testdox tests/Unit
 
       - name: Stop docker images
         run: docker compose down
