@@ -12,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Pre Build
+        run: cp internal/php/custom.php.ini.dist internal/php/custom.php.ini
+
       - name: Build docker images
         run: docker compose build
 

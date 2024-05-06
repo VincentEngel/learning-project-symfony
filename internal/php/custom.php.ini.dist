@@ -1,7 +1,7 @@
-log_errors = On
+;log_errors = On
 error_reporting = E_ALL
 
-xdebug.mode = debug
-xdebug.client_host=host.docker.internal
+;xdebug.mode = debug
+;xdebug.client_host=host.docker.internal
 ;xdebug.client_host=host.lima.internal
-xdebug.idekey = PHPSTORM
+;xdebug.idekey = PHPSTORM
