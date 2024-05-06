@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Pre Build
+      - name: Pre Build # Image should be created and pushed before any other workflow and then be re-used
         run: |
           cp internal/php/custom.php.ini.dist internal/php/custom.php.ini
             cp .env.test .env
