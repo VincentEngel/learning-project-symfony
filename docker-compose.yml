@@ -4,8 +4,6 @@ services:
       dockerfile: internal/php/Dockerfile
     expose:
       - 9000
-    depends_on:
-      - db
     env_file:
       - .env
     volumes:
@@ -23,6 +21,10 @@ services:
       MYSQL_PASSWORD: development
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: lps
+    healthcheck:
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD' ]
+      timeout: 20s
+      retries: 10
 
   nginx:
     image: nginx:stable-alpine

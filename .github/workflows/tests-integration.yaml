@@ -19,7 +19,7 @@ jobs:
         run: docker compose build
 
       - name: Start docker images
-        run: docker compose up -d
+        run: docker compose up -d --wait
 
       - name: Install Dependencies
         run: docker compose exec -it php composer install
