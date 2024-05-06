@@ -1,4 +1,4 @@
-name: Validate Coding Standards
+name: Run Tests
 
 on:
   push:
@@ -11,6 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: composer install
 
       - name: Unit Tests
         run: php vendor/bin/phpunit --testdox tests/Unit

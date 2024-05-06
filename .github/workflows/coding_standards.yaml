@@ -12,5 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install Dependencies
+        run: composer install
+
       - name: PHPCS
         run: php vendor/bin/phpcs -p src tests
