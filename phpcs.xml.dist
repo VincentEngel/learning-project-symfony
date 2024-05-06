@@ -10,10 +10,9 @@
 
     <rule ref="PSR12"/>
 
-    <file>bin/</file>
-    <file>config/</file>
-    <file>public/</file>
     <file>src/</file>
     <file>tests/</file>
+
+    <exclude-pattern type="relative">*/Migrations/*</exclude-pattern>
 
 </ruleset>
