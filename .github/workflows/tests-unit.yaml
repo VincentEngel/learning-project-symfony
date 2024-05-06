@@ -24,6 +24,9 @@ jobs:
       - name: Install Dependencies
         run: docker compose exec -it php composer install
 
+      - name: Build Cache
+        run: docker compose exec -it php php bin/console cache:clear --env=test
+
       - name: Run Unit Tests
         run: docker compose exec -it php php bin/phpunit --testdox tests/Unit
 

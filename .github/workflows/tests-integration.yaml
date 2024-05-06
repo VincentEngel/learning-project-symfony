@@ -24,8 +24,11 @@ jobs:
       - name: Install Dependencies
         run: docker compose exec -it php composer install
 
+      - name: Build Cache
+        run: docker compose exec -it php php bin/console cache:clear --env=test
+
       - name: Run Migrations
-        run: docker compose exec -it php php bin/console doctrine:migrations:migrate --no-interaction
+        run: docker compose exec -it php php bin/console doctrine:migrations:migrate --no-interaction --env=test
 
       - name: Run Integration Tests
         run: docker compose exec -it php php bin/phpunit --testdox tests/Integration
