@@ -14,6 +14,6 @@ final readonly class ListPostsQueryHandler implements QueryHandler
 
     public function __invoke(ListPostsQuery $query): ListPostsQueryResponse
     {
-        return new ListPostsQueryResponse();
+        return ListPostsQueryResponse::fromDomainPostsArray($this->listPosts->__invoke());
     }
 }

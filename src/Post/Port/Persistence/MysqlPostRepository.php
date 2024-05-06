@@ -48,4 +48,19 @@ class MysqlPostRepository implements PostRepository
 
         return new Post(new PostId($result['id']), new PostContent($result['content']),);
     }
+
+    public function findAll(): array
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder
+            ->select('*')
+            ->from(self::TABLE_NAME);
+        $results = $queryBuilder->executeQuery()->fetchAllAssociative();
+        $posts = [];
+        foreach ($results as $result) {
+            $posts[] = new Post(new PostId($result['id']), new PostContent($result['content']),);
+        }
+
+        return $posts;
+    }
 }

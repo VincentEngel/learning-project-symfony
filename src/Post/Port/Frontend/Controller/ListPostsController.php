@@ -6,6 +6,7 @@ namespace App\Post\Port\Frontend\Controller;
 
 use App\Post\Application\UseCase\ListPosts\ListPostsQuery;
 use App\Post\Application\UseCase\ListPosts\ListPostsQueryResponse;
+use App\Post\Application\UseCase\Shared\Post;
 use App\Shared\Application\Bus\Query\QueryBus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,19 @@ class ListPostsController extends AbstractController
     {
         /** @var ListPostsQueryResponse $response */
         $response = $queryBus->ask(new ListPostsQuery());
-        return $this->render('@post/list_posts.html.twig');
+
+        return $this->render(
+            '@post/list_posts.html.twig',
+            [
+                'posts' => array_map(
+                    fn (Post $post) =>
+                        [
+                            'id' => $post->id,
+                            'content' => $post->content,
+                        ],
+                    $response->posts
+                )
+            ]
+        );
     }
 }

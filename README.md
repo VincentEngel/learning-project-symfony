@@ -15,20 +15,20 @@ In Settings -> PHP -> Servers, add localhost with port 80 and absolute path /var
 # PHP Code Sniffer and Beautifier
 https://github.com/PHPCSStandards/PHP_CodeSniffer/
 
-1. ./vendor/bin/phpcs -p
-2. ./vendor/bin/phpcbf -p
+1. php vendor/bin/phpcs -p
+2. php vendor/bin/phpcbf -p
 
 # Psalm
 https://github.com/vimeo/psalm/
 
-./vendor/bin/psalm
+php vendor/bin/psalm
 
 # PHPStan
 https://github.com/phpstan/phpstan
 
-vendor/bin/phpstan analyse src tests
+php vendor/bin/phpstan analyse src tests
 
 # PHP Unit
 https://github.com/sebastianbergmann/phpunit/
 
-./vendor/bin/phpunit --testdox tests
+php vendor/bin/phpunit --testdox tests

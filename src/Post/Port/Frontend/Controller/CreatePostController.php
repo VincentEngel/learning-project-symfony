@@ -24,8 +24,11 @@ class CreatePostController extends AbstractController
     {
         $command = new CreatePostCommand(content: $request->getPayload()->get('content'));
         $commandBus->dispatch($command);
-        return $this->redirectToRoute('post.show', [
+        return $this->redirectToRoute(
+            'post.show',
+            [
                 'id' => $command->id,
-            ],);
+            ],
+        );
     }
 }

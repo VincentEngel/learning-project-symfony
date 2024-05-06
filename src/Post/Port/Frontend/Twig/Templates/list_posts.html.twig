@@ -5,8 +5,15 @@
 {% block body %}
     <h1>Posts</h1>
 
-    <ul>
-        <li>No posts found.</li>
-    </ul>
+    {% for post in posts %}
+        <ul>
+            <li>
+                id: <a href="{{ path('post.show', {id: post.id}) }}">{{ post.id }}</a>
+            </li>
+            <li>
+                content: {{ post.content }}
+            </li>
+        </ul>
+    {% endfor %}
 
 {% endblock %}

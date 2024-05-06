@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Unit\Shared\Domain\ValueObject;
@@ -9,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class UuidTest extends TestCase
 {
-    public function test_only_valid_uuids_are_accepted(): void
+    public function testOnlyValidUuidsAreAccepted(): void
     {
         $this->expectException(InvalidUuidException::class);
         new Uuid('invalid-uuid');

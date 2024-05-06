@@ -11,4 +11,9 @@ interface PostRepository
 {
     public function save(Post $post): void;
     public function findByPostId(PostId $postId): ?Post;
+
+    /**
+     * @return Post[]
+     */
+    public function findAll(): array;
 }
