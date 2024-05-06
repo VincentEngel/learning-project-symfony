@@ -24,12 +24,15 @@ class CreatePostCommandHandlerTest extends BaseKernelTestCase
         $handler->__invoke($command);
 
         // Assert
-        self::assertNotNull($command->id);
+        self::assertNotNull($command->generatedEntityId);
 
         /** @var PostRepository $repository */
         $repository = self::getContainer()->get(PostRepository::class);
-        $post = $repository->findByPostId(new PostId($command->id));
+
+        $post = $repository->findByPostId(new PostId($command->generatedEntityId));
+
         self::assertNotNull($post);
-        self::assertEquals($command->id, $post->getId()->toPrimitive());
+        self::assertEquals($command->generatedEntityId, $post->getId()->toPrimitive());
+        self::assertEmpty($post->getParentPostId());
     }
 }

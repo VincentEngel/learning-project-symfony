@@ -9,13 +9,22 @@ use App\Shared\Domain\ValueObject\Uuid;
 
 final class Post extends AggregateRoot
 {
-    public function __construct(private PostId $id, private PostContent $content,)
-    {
+    public function __construct(
+        private PostId $id,
+        private PostContent $content,
+        private ?PostId $parentPostId = null,
+    ) {
     }
 
-    public static function createFromContent(PostContent $content): Post
-    {
-        return new Post(new PostId(Uuid::createRandom()->toPrimitive()), $content,);
+    public static function createFromUserInput(
+        PostContent $content,
+        ?PostId $parentPostId = null,
+    ): Post {
+        return new Post(
+            id: new PostId(Uuid::createRandom()->toPrimitive()),
+            content: $content,
+            parentPostId: $parentPostId,
+        );
     }
 
     public function getContent(): PostContent
@@ -26,5 +35,10 @@ final class Post extends AggregateRoot
     public function getId(): PostId
     {
         return $this->id;
+    }
+
+    public function getParentPostId(): ?PostId
+    {
+        return $this->parentPostId;
     }
 }

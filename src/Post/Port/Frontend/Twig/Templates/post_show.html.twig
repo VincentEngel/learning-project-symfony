@@ -7,4 +7,10 @@
 
     <p>{{ post.content }}</p>
 
+    {% if post.parentPostId %}
+        <br>
+        <br>
+        <a href="{{ path('post.show', {id: post.parentPostId}) }}">Parent Post: {{ post.parentPostId }}</a>
+    {% endif %}
+
 {% endblock %}

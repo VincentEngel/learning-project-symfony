@@ -9,12 +9,19 @@ use App\Shared\Application\Bus\Query\QueryResponse;
 
 final readonly class GetPostQueryResponse implements QueryResponse
 {
-    public function __construct(public string $id, public string $content,)
-    {
+    public function __construct(
+        public string $id,
+        public string $content,
+        public ?string $parentPostId = null,
+    ) {
     }
 
     public static function fromPost(Post $post): self
     {
-        return new self(id: $post->getId()->toPrimitive(), content: $post->getContent()->value(),);
+        return new self(
+            id: $post->getId()->toPrimitive(),
+            content: $post->getContent()->value(),
+            parentPostId: $post->getParentPostId()?->toPrimitive()
+        );
     }
 }

@@ -19,10 +19,12 @@ class ShowPostController extends AbstractController
     {
         /** @var GetPostQueryResponse $response */
         $response = $queryBus->ask(new GetPostQuery(id: $request->query->get('id')));
+
         return $this->render('@post/post_show.html.twig', [
                 'post' => [
                     'id' => $response->id,
                     'content' => $response->content,
+                    'parentPostId' => $response->parentPostId,
                 ],
             ]);
     }

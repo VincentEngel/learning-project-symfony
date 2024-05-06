@@ -8,6 +8,16 @@
     <form action="{{ url('post.create') }}" method="post">
         <label for="content">Your Text:</label><br>
         <input type="text" id="content" name="content"><br>
+
+        <label for="parent_post_id">This is answer to this post:</label>
+        <select name="parent_post_id" id="parent_post_id">
+            <option value="" selected>-</option>
+        {% for post in posts %}
+            <option value="{{ post.id }}">{{ post.content }}</option>
+        {% endfor %}
+        </select>
+        <br>
+
         <input type="submit" value="Create Post">
     </form>
 

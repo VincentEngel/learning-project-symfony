@@ -13,7 +13,8 @@ final class CreatePostCommand implements Command
      */
     public function __construct(
         public readonly string $content,
-        public ?string $id = null
+        public ?string $parentPostId = null,
+        public ?string $generatedEntityId = null,
     ) {
     }
 }

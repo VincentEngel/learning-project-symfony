@@ -9,10 +9,10 @@ use Symfony\Component\Uid\Uuid as SymfonyUuid;
 
 readonly class Uuid extends StringValueObject
 {
-    public function __construct(string $value)
+    public function __construct(string $content)
     {
-        self::guardAgainstInvalidUuid($value);
-        parent::__construct($value);
+        self::guardAgainstInvalidUuid($content);
+        parent::__construct($content);
     }
 
     public function toPrimitive(): string
