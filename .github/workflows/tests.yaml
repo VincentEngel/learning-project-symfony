@@ -1,0 +1,16 @@
+name: Validate Coding Standards
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Unit Tests
+        run: php vendor/bin/phpunit --testdox tests/Unit

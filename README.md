@@ -31,4 +31,4 @@ php vendor/bin/phpstan analyse src tests
 # PHP Unit
 https://github.com/sebastianbergmann/phpunit/
 
-php vendor/bin/phpunit --testdox tests
+php vendor/bin/phpunit --testdox tests/Unit

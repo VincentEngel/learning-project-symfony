@@ -18,6 +18,7 @@ class GetPostController extends AbstractController
     {
         /** @var GetPostQueryResponse $response */
         $response = $queryBus->ask(new GetPostQuery(id: 'some_uuid'));
+
         return $this->json([
             'id' => $response->id,
             'content' => $response->content,
