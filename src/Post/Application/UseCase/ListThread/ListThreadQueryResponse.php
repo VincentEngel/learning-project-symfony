@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Post\Application\UseCase\ListPosts;
+namespace App\Post\Application\UseCase\ListThread;
 
 use App\Post\Application\UseCase\Shared\Post;
 use App\Post\Domain\Entity\Post as DomainEntityPost;
 use App\Shared\Application\Bus\Query\QueryResponse;
 
-final readonly class ListPostsQueryResponse implements QueryResponse
+final readonly class ListThreadQueryResponse implements QueryResponse
 {
     /**
      * @param Post[] $posts
@@ -22,7 +22,7 @@ final readonly class ListPostsQueryResponse implements QueryResponse
      */
     public static function fromDomainPostsArray(array $domainPosts): self
     {
-        return new ListPostsQueryResponse(
+        return new ListThreadQueryResponse(
             array_map(
                 fn (DomainEntityPost $post) => Post::fromDomainEntityPost($post),
                 $domainPosts

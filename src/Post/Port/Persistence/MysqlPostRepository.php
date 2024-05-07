@@ -79,4 +79,46 @@ class MysqlPostRepository implements PostRepository
 
         return $posts;
     }
+
+    public function findThreadByPostId(PostId $postId): array
+    {
+
+        $result = $this->connection->executeQuery(
+            '
+            WITH RECURSIVE parents AS (
+    SELECT p.*
+    FROM posts p
+    WHERE p.id = "0059960d-a44a-4c92-8d1d-099be9fefdb9"
+    UNION ALL
+    SELECT p.*
+    FROM posts p
+             INNER JOIN parents
+                        ON p.id = parents.parent_post_id
+),
+               children AS (
+                   SELECT p.*
+                   FROM posts p
+                            INNER JOIN parents ON p.parent_post_id = parents.id
+               )
+
+SELECT * FROM parents
+UNION
+SELECT * FROM children;
+            '
+        );
+
+        $results = $result->fetchAllAssociative();
+
+        $posts = [];
+
+        foreach ($results as $result) {
+            $posts[] = new Post(
+                id: new PostId($result['id']),
+                content: new PostContent($result['content']),
+                parentPostId: $result['parent_post_id'] !== null ? new PostId($result['parent_post_id']) : null,
+            );
+        }
+
+        return $posts;
+    }
 }

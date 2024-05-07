@@ -16,4 +16,9 @@ interface PostRepository
      * @return Post[]
      */
     public function findAll(): array;
+
+    /**
+     * @return Post[]
+     */
+    public function findThreadByPostId(PostId $postId): array;
 }

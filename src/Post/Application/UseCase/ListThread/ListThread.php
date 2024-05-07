@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Post\Application\UseCase\ListPosts;
+namespace App\Post\Application\UseCase\ListThread;
 
 use App\Post\Domain\Entity\Post;
+use App\Post\Domain\Entity\PostId;
 use App\Post\Domain\Repository\PostRepository;
 
-final readonly class ListPosts
+class ListThread
 {
     public function __construct(private PostRepository $postRepository)
     {
@@ -16,8 +17,8 @@ final readonly class ListPosts
     /**
      * @return Post[]
      */
-    public function __invoke(): array
+    public function __invoke(PostId $postId): array
     {
-        return $this->postRepository->findAll();
+        return $this->postRepository->findThreadByPostId($postId);
     }
 }
