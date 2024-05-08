@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Pipeline
 
 on:
   push:
@@ -6,9 +6,5 @@ on:
       - main
 
 jobs:
-  code-standard:
-    uses: ./.github/workflows/coding_standards.yml
-  unit-tests:
-    uses: ./.github/workflows/tests-unit.yml
-  integration-tests:
-    uses: ./.github/workflows/tests-integration.yml
+  tests:
+    uses: ./.github/workflows/tests/main.yml
