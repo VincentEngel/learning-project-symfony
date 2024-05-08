@@ -1,0 +1,12 @@
+name: Run Tests
+
+on:
+  workflow_call:
+
+jobs:
+  code-standard:
+    uses: ./.github/workflows/tests-coding_standards.yml
+  unit-tests:
+    uses: ./.github/workflows/tests-unit.yml
+  integration-tests:
+    uses: ./.github/workflows/tests-integration.yml
