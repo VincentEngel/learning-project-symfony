@@ -1,19 +1,19 @@
-name: Validate Coding Standards
+name: Run Unit Tests
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
-  validate-code-standards:
+  run-unit-tests:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Pre Build # Image should be created and pushed before any other workflow and then be re-used
-        run: cp internal/php/custom.php.ini.dist internal/php/custom.php.ini
+        run: |
+          cp internal/php/custom.php.ini.dist internal/php/custom.php.ini
+          cp .env.test .env
 
       - name: Build docker images
         run: docker compose build
@@ -24,8 +24,11 @@ jobs:
       - name: Install Dependencies
         run: docker compose exec -it php composer install
 
-      - name: PHPCS
-        run: docker compose exec -it php php vendor/bin/phpcs --ignore=*/Migrations/* -p src tests
+      - name: Build Cache
+        run: docker compose exec -it php php bin/console cache:clear --env=test
+
+      - name: Run Unit Tests
+        run: docker compose exec -it php php bin/phpunit --testdox tests/Unit
 
       - name: Stop docker images
         run: docker compose down

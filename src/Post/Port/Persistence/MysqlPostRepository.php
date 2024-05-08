@@ -50,11 +50,7 @@ class MysqlPostRepository implements PostRepository
             return null;
         }
 
-        return new Post(
-            id: new PostId($result['id']),
-            content: new PostContent($result['content']),
-            parentPostId: $result['parent_post_id'] !== null ? new PostId($result['parent_post_id']) : null,
-        );
+        return self::buildPostFromQueryResult($result);
     }
 
     public function findAll(): array
@@ -70,11 +66,7 @@ class MysqlPostRepository implements PostRepository
         $posts = [];
 
         foreach ($results as $result) {
-            $posts[] = new Post(
-                id: new PostId($result['id']),
-                content: new PostContent($result['content']),
-                parentPostId: $result['parent_post_id'] !== null ? new PostId($result['parent_post_id']) : null,
-            );
+            $posts[] = self::buildPostFromQueryResult($result);
         }
 
         return $posts;
@@ -86,24 +78,24 @@ class MysqlPostRepository implements PostRepository
         $result = $this->connection->executeQuery(
             '
             WITH RECURSIVE parents AS (
-    SELECT p.*
-    FROM posts p
-    WHERE p.id = "0059960d-a44a-4c92-8d1d-099be9fefdb9"
-    UNION ALL
-    SELECT p.*
-    FROM posts p
-             INNER JOIN parents
-                        ON p.id = parents.parent_post_id
-),
-               children AS (
-                   SELECT p.*
-                   FROM posts p
-                            INNER JOIN parents ON p.parent_post_id = parents.id
-               )
-
-SELECT * FROM parents
-UNION
-SELECT * FROM children;
+                SELECT p.*
+                FROM posts p
+                WHERE p.id = "0059960d-a44a-4c92-8d1d-099be9fefdb9"
+                UNION ALL
+                SELECT p.*
+                FROM posts p
+                         INNER JOIN parents
+                                ON p.id = parents.parent_post_id
+            ),
+            children AS (
+                SELECT p.*
+                FROM posts p
+                         INNER JOIN parents ON p.parent_post_id = parents.id
+            )
+            
+            SELECT * FROM parents
+            UNION
+            SELECT * FROM children;
             '
         );
 
@@ -112,13 +104,18 @@ SELECT * FROM children;
         $posts = [];
 
         foreach ($results as $result) {
-            $posts[] = new Post(
-                id: new PostId($result['id']),
-                content: new PostContent($result['content']),
-                parentPostId: $result['parent_post_id'] !== null ? new PostId($result['parent_post_id']) : null,
-            );
+            $posts[] = self::buildPostFromQueryResult($result);
         }
 
         return $posts;
+    }
+
+    private static function buildPostFromQueryResult(array $postValues): Post
+    {
+        return new Post(
+            id: new PostId($postValues['id']),
+            content: new PostContent($postValues['content']),
+            parentPostId: $postValues['parent_post_id'] !== null ? new PostId($postValues['parent_post_id']) : null,
+        );
     }
 }

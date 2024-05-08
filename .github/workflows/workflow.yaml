@@ -1,0 +1,10 @@
+name: Run Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests/main.yaml@main
