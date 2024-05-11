@@ -32,6 +32,10 @@ services:
         arguments:
             $messageBus: '@command.bus'
 
+    App\Shared\Port\Bus\Event\SymfonySyncEventBus:
+        arguments:
+            $bus: '@sync.event.bus'
+
     _instanceof:
         App\Shared\Application\Bus\Command\CommandHandler:
             tags:
@@ -40,3 +44,7 @@ services:
         App\Shared\Application\Bus\Query\QueryHandler:
             tags:
                 - { name: messenger.message_handler, bus: query.bus }
+
+        App\Shared\Application\Bus\Event\DomainEventSubscriber:
+            tags:
+                - { name: messenger.message_handler, bus: sync.event.bus }

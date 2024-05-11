@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Post\Domain\Entity;
 
+use App\Post\Domain\Exceptions\InvalidPostContentException;
 use App\Shared\Domain\ValueObject\StringValueObject;
 
 final readonly class PostContent extends StringValueObject
@@ -17,7 +18,7 @@ final readonly class PostContent extends StringValueObject
     private static function guardAgainstEmptyContent(string $content): void
     {
         if (empty($content)) {
-            throw new \InvalidArgumentException('Post content cannot be empty');
+            throw InvalidPostContentException::emptyContent();
         }
     }
 }
