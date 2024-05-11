@@ -12,12 +12,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class SymfonyQueryBus implements QueryBus
 {
-    use HandleTrait;
+    use HandleTrait; // Using trait because ->handle() returns mixed
 
 
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(private readonly MessageBusInterface $messageBus)
     {
-        $this->messageBus = $messageBus;
     }
 
     public function ask(Query $query): QueryResponse

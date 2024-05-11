@@ -34,7 +34,7 @@ services:
 
     App\Shared\Port\Bus\Event\SymfonySyncEventBus:
         arguments:
-            $bus: '@sync.event.bus'
+            $messageBus: '@sync.event.bus'
 
     _instanceof:
         App\Shared\Application\Bus\Command\CommandHandler:

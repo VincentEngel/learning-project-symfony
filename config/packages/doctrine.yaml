@@ -11,7 +11,3 @@ doctrine:
         password: development
         host: db
         port: 3306
-        default_table_options:
-            charset: utf8mb4
-            collate: utf8mb4_unicode
-            collation: utf8mb4_unicode
