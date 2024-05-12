@@ -16,6 +16,9 @@ final readonly class PostCreatedEventSubscriber implements DomainEventSubscriber
     }
     public function __invoke(PostCreatedEvent $event): void
     {
-        $this->commandBus->dispatch(new ExportPostCommand($event->aggregateId));
+        $this->commandBus->dispatch(new ExportPostCommand(
+            $event->aggregateId,
+            $event::EVENT_NAME,
+        ));
     }
 }
