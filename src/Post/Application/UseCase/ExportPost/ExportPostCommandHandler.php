@@ -6,6 +6,7 @@ namespace App\Post\Application\UseCase\ExportPost;
 
 use App\Post\Domain\Entity\PostId;
 use App\Shared\Application\Bus\Command\CommandHandler;
+use App\Shared\Domain\Enums\DomainEntityEvents;
 
 final readonly class ExportPostCommandHandler implements CommandHandler
 {
@@ -14,6 +15,9 @@ final readonly class ExportPostCommandHandler implements CommandHandler
     }
     public function __invoke(ExportPostCommand $command): void
     {
-        $this->postCreated->__invoke(new PostId($command->id));
+        $this->postCreated->__invoke(
+            postId: new PostId($command->id),
+            event: DomainEntityEvents::from($command->event),
+        );
     }
 }
