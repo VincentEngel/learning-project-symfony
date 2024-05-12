@@ -1,0 +1,13 @@
+syntax = "proto3";
+package post;
+
+message Post {
+  Event event = 1;
+  string id = 2;
+  string content = 3;
+  optional string parent_id = 4;
+
+  enum Event {
+    CREATED = 0;
+  }
+}

@@ -43,3 +43,6 @@ https://github.com/sebastianbergmann/phpunit/
 Create a topic
 1. docker compose exec -it kafka bash
 2. /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+
+# Google Protobuf
+protoc --php_out=gprotobuf src/Shared/Port/Gprotobuf/post.proto

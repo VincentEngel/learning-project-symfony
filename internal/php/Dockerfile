@@ -19,6 +19,8 @@ RUN apt-get install -y librdkafka-dev
 RUN pecl install rdkafka
 RUN docker-php-ext-enable rdkafka
 
+RUN apt-get install -y protobuf-compiler
+
 FROM base as development
 
 RUN pecl install xdebug-3.3.2
