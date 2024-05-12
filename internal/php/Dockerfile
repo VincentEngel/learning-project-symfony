@@ -15,11 +15,14 @@ RUN apt-get install -y libzip-dev \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip
 
+RUN apt-get install -y librdkafka-dev
+RUN pecl install rdkafka
+RUN docker-php-ext-enable rdkafka
 
 FROM base as development
 
 RUN pecl install xdebug-3.3.2
-RUN docker-php-ext-enable  xdebug
+RUN docker-php-ext-enable xdebug
 
 COPY /internal/php/custom.php.ini /usr/local/etc/php/conf.d/
 
