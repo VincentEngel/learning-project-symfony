@@ -25,8 +25,8 @@ services:
 
     # Messenger Bus
     App\Shared\Port\Bus\Query\SymfonyQueryBus:
-    #    arguments:
-    #        $messageBus: '@query.bus'
+        arguments:
+            $messageBus: '@query.bus'
 
     App\Shared\Port\Bus\Command\SymfonyCommandBus:
         arguments:
