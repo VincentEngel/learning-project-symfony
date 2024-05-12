@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Post\Application\UseCase\PostCreated;
+namespace App\Post\Application\UseCase\ExportPost;
 
 use App\Post\Domain\Entity\PostId;
 use App\Post\Domain\Repository\PostRepository;
 
-final readonly class PostCreated
+final readonly class ExportPost
 {
     public function __construct(private PostRepository $postRepository)
     {
