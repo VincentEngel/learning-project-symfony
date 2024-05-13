@@ -48,3 +48,24 @@ services:
         App\Shared\Application\Bus\Event\DomainEventSubscriber:
             tags:
                 - { name: messenger.message_handler, bus: sync.event.bus }
+
+    RdKafka\Conf:
+        factory: ['@App\Shared\Port\Kafka\KafkaConfigFactory', 'create']
+        arguments:
+            $bootstrapServers: '%env(KAFKA_BOOTSTRAP_SERVERS)%'
+            $queueBufferingMaxMessages: '%env(KAFKA_QUEUE_BUFFERING_MAX_MESSAGES)%'
+
+    RdKafka\Producer:
+        factory: ['@App\Shared\Port\Kafka\KafkaProducerFactory', 'create']
+        arguments:
+            $conf: '@RdKafka\Conf'
+
+    kafka.publisher.lps.posts:
+        class: App\Shared\Port\Kafka\KafkaPublisher
+        arguments:
+            $producer: '@RdKafka\Producer'
+            $topicName: '%env(KAFKA_TOPIC_LPS_POSTS)%'
+
+    App\Post\Application\UseCase\ExportPost\ExportPost:
+        arguments:
+            $publisher: '@kafka.publisher.lps.posts'

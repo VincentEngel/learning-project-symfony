@@ -6,13 +6,16 @@ namespace App\Post\Application\UseCase\ExportPost;
 
 use App\Post\Domain\Entity\PostId;
 use App\Post\Domain\Repository\PostRepository;
+use App\Shared\Application\Kafka\PublisherInterface;
 use App\Shared\Domain\Enums\DomainEntityEvents;
+use App\Shared\Port\Kafka\Message;
 
 final readonly class ExportPost
 {
     public function __construct(
         private PostRepository $postRepository,
-        private ExportPostConverter $exportPostConverter
+        private ExportPostConverter $exportPostConverter,
+        private PublisherInterface $publisher,
     ) {
     }
 
@@ -22,5 +25,7 @@ final readonly class ExportPost
             post: $this->postRepository->findByPostId($postId),
             event: $event,
         );
+
+        $this->publisher->publish(new Message($post->serializeToJsonString()));
     }
 }
