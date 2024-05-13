@@ -69,3 +69,20 @@ services:
     App\Post\Application\UseCase\ExportPost\ExportPost:
         arguments:
             $publisher: '@kafka.publisher.lps.posts'
+
+    kafka.config.consumer.lps.posts:
+        class: RdKafka\Conf
+        factory: ['@App\Shared\Port\Kafka\KafkaConsumerConfigFactory', 'create']
+        arguments:
+            $bootstrapServers: '%env(KAFKA_BOOTSTRAP_SERVERS)%'
+            $groupId: '1'
+
+    RdKafka\KafkaConsumer:
+        factory: [ '@App\Shared\Port\Kafka\KafkaConsumerFactory', 'create' ]
+        arguments:
+            $conf: '@kafka.config.consumer.lps.posts'
+
+    App\Statistics\Port\Kafka\LpsPostsConsumer:
+        arguments:
+            $consumer: '@RdKafka\KafkaConsumer'
+            $topicName: '%env(KAFKA_TOPIC_LPS_POSTS)%'
