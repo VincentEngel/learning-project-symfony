@@ -1,0 +1,27 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
+  App\Statistics\:
+    resource: '%kernel.project_dir%/src/Statistics'
+
+  kafka.config.consumer.lps.posts:
+    class: RdKafka\Conf
+    factory: ['@App\Shared\Port\Kafka\ConsumerConfigFactory', 'create']
+    arguments:
+      $bootstrapServers: '%env(KAFKA_BOOTSTRAP_SERVERS)%'
+      $groupId: '1'
+
+  RdKafka\KafkaConsumer:
+    factory: [ '@App\Shared\Port\Kafka\ConsumerFactory', 'create' ]
+    arguments:
+      $conf: '@kafka.config.consumer.lps.posts'
+
+  App\Statistics\Port\Kafka\LpsPostsConsumer:
+    arguments:
+      $consumer: '@RdKafka\KafkaConsumer'
+      $topicName: '%env(KAFKA_TOPIC_LPS_POSTS)%'
+

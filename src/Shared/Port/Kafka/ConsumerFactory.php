@@ -7,7 +7,7 @@ namespace App\Shared\Port\Kafka;
 use RdKafka\Conf;
 use RdKafka\KafkaConsumer;
 
-final readonly class KafkaConsumerFactory
+final readonly class ConsumerFactory
 {
     public static function create(Conf $conf): KafkaConsumer
     {

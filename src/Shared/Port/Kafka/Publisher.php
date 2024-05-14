@@ -10,7 +10,7 @@ use App\Shared\Application\Kafka\PublisherInterface;
 use RdKafka\Producer;
 use RdKafka\ProducerTopic;
 
-final readonly class KafkaPublisher implements PublisherInterface
+final readonly class Publisher implements PublisherInterface
 {
     private ProducerTopic $topic;
     public function __construct(

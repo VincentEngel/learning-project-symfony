@@ -6,7 +6,7 @@ namespace App\Shared\Port\Kafka;
 
 use RdKafka\Conf;
 
-final readonly class KafkaConsumerConfigFactory
+final readonly class ConsumerConfigFactory
 {
     public static function create(string $bootstrapServers, string $groupId,): Conf
     {

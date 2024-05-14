@@ -1,0 +1,39 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
+  App\Shared\:
+    resource: '%kernel.project_dir%/src/Shared'
+    exclude:
+      - '%kernel.project_dir%/src/Shared/Domain'
+      - '%kernel.project_dir%/src/Shared/Port/Kafka/Consumer.php'
+      - '%kernel.project_dir%/src/Shared/Port/Kafka/Message.php'
+      - '%kernel.project_dir%/src/Shared/Port/Kafka/MessagesHolder.php'
+      - '%kernel.project_dir%/src/Shared/Port/Kafka/Publisher.php'
+
+  # Messenger Bus
+  App\Shared\Port\Bus\Query\SymfonyQueryBus:
+    arguments:
+      $messageBus: '@query.bus'
+
+  App\Shared\Port\Bus\Command\SymfonyCommandBus:
+    arguments:
+      $messageBus: '@command.bus'
+
+  App\Shared\Port\Bus\Event\SymfonySyncEventBus:
+    arguments:
+      $messageBus: '@sync.event.bus'
+
+  RdKafka\Conf:
+    factory: [ '@App\Shared\Port\Kafka\ConfigFactory', 'create' ]
+    arguments:
+      $bootstrapServers: '%env(KAFKA_BOOTSTRAP_SERVERS)%'
+      $queueBufferingMaxMessages: '%env(KAFKA_QUEUE_BUFFERING_MAX_MESSAGES)%'
+
+  RdKafka\Producer:
+    factory: [ '@App\Shared\Port\Kafka\ProducerFactory', 'create' ]
+    arguments:
+      $conf: '@RdKafka\Conf'

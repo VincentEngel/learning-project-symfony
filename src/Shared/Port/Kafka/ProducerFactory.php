@@ -7,7 +7,7 @@ namespace App\Shared\Port\Kafka;
 use RdKafka\Conf;
 use RdKafka\Producer;
 
-final readonly class KafkaProducerFactory
+final readonly class ProducerFactory
 {
     public static function create(Conf $conf): Producer
     {

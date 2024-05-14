@@ -6,7 +6,7 @@ namespace App\Shared\Port\Kafka;
 
 use RdKafka\Conf;
 
-final readonly class KafkaConfigFactory
+final readonly class ConfigFactory
 {
     public static function create(string $bootstrapServers, int $queueBufferingMaxMessages,): Conf
     {

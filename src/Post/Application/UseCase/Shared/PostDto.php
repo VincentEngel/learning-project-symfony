@@ -6,7 +6,7 @@ namespace App\Post\Application\UseCase\Shared;
 
 use App\Post\Domain\Entity\Post as DomainEntityPost;
 
-readonly class Post
+final readonly class PostDto
 {
     public function __construct(
         public string $id,

@@ -6,7 +6,7 @@ namespace App\Post\Port\Frontend\Controller;
 
 use App\Post\Application\UseCase\ListThread\ListThreadQuery;
 use App\Post\Application\UseCase\ListThread\ListThreadQueryResponse;
-use App\Post\Application\UseCase\Shared\Post;
+use App\Post\Application\UseCase\Shared\PostDto;
 use App\Shared\Application\Bus\Query\QueryBus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class ListThreadController extends AbstractController
             '@post/thread_show.html.twig',
             [
                 'posts' => array_map(
-                    fn (Post $post) =>
+                    fn (PostDto $post) =>
                     [
                         'id' => $post->id,
                         'content' => $post->content,

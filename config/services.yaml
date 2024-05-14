@@ -1,3 +1,6 @@
+imports:
+    - { resource: services/**/**/* }
+
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
 
@@ -10,79 +13,3 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
-    # Messenger Bus
-    App\Shared\Port\Bus\Query\SymfonyQueryBus:
-        arguments:
-            $messageBus: '@query.bus'
-
-    App\Shared\Port\Bus\Command\SymfonyCommandBus:
-        arguments:
-            $messageBus: '@command.bus'
-
-    App\Shared\Port\Bus\Event\SymfonySyncEventBus:
-        arguments:
-            $messageBus: '@sync.event.bus'
-
-    _instanceof:
-        App\Shared\Application\Bus\Command\CommandHandler:
-            tags:
-                - { name: messenger.message_handler, bus: command.bus }
-
-        App\Shared\Application\Bus\Query\QueryHandler:
-            tags:
-                - { name: messenger.message_handler, bus: query.bus }
-
-        App\Shared\Application\Bus\Event\DomainEventSubscriber:
-            tags:
-                - { name: messenger.message_handler, bus: sync.event.bus }
-
-    RdKafka\Conf:
-        factory: ['@App\Shared\Port\Kafka\KafkaConfigFactory', 'create']
-        arguments:
-            $bootstrapServers: '%env(KAFKA_BOOTSTRAP_SERVERS)%'
-            $queueBufferingMaxMessages: '%env(KAFKA_QUEUE_BUFFERING_MAX_MESSAGES)%'
-
-    RdKafka\Producer:
-        factory: ['@App\Shared\Port\Kafka\KafkaProducerFactory', 'create']
-        arguments:
-            $conf: '@RdKafka\Conf'
-
-    kafka.publisher.lps.posts:
-        class: App\Shared\Port\Kafka\KafkaPublisher
-        arguments:
-            $producer: '@RdKafka\Producer'
-            $topicName: '%env(KAFKA_TOPIC_LPS_POSTS)%'
-
-    App\Post\Application\UseCase\ExportPost\ExportPost:
-        arguments:
-            $publisher: '@kafka.publisher.lps.posts'
-
-    kafka.config.consumer.lps.posts:
-        class: RdKafka\Conf
-        factory: ['@App\Shared\Port\Kafka\KafkaConsumerConfigFactory', 'create']
-        arguments:
-            $bootstrapServers: '%env(KAFKA_BOOTSTRAP_SERVERS)%'
-            $groupId: '1'
-
-    RdKafka\KafkaConsumer:
-        factory: [ '@App\Shared\Port\Kafka\KafkaConsumerFactory', 'create' ]
-        arguments:
-            $conf: '@kafka.config.consumer.lps.posts'
-
-    App\Statistics\Port\Kafka\LpsPostsConsumer:
-        arguments:
-            $consumer: '@RdKafka\KafkaConsumer'
-            $topicName: '%env(KAFKA_TOPIC_LPS_POSTS)%'

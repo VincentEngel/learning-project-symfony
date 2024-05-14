@@ -1,8 +1,6 @@
 .idea
 docker-compose.override.yml
 
-/gprotobuf/
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

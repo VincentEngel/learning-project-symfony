@@ -1,0 +1,39 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
+  App\Post\:
+    resource: '%kernel.project_dir%/src/Post'
+    exclude:
+      - '%kernel.project_dir%/src/Post/Domain/Entity'
+      - '%kernel.project_dir%/src/Post/Domain/Events'
+      - '%kernel.project_dir%/src/Post/**/*Command.php'
+      - '%kernel.project_dir%/src/Post/**/*Query.php'
+      - '%kernel.project_dir%/src/Post/**/*Response.php'
+      - '%kernel.project_dir%/src/Post/**/*Dto.php'
+
+  _instanceof:
+    App\Shared\Application\Bus\Command\CommandHandler:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
+    App\Shared\Application\Bus\Query\QueryHandler:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+
+    App\Shared\Application\Bus\Event\DomainEventSubscriber:
+      tags:
+        - { name: messenger.message_handler, bus: sync.event.bus }
+
+  kafka.publisher.lps.posts:
+    class: App\Shared\Port\Kafka\Publisher
+    arguments:
+      $producer: '@RdKafka\Producer'
+      $topicName: '%env(KAFKA_TOPIC_LPS_POSTS)%'
+
+  App\Post\Application\UseCase\ExportPost\ExportPost:
+    arguments:
+      $publisher: '@kafka.publisher.lps.posts'
