@@ -26,6 +26,10 @@ FROM base as development
 RUN pecl install xdebug-3.3.2
 RUN docker-php-ext-enable xdebug
 
+RUN apt-get install -y librabbitmq-dev
+RUN pecl install amqp
+RUN docker-php-ext-enable amqp
+
 COPY /internal/php/custom.php.ini /usr/local/etc/php/conf.d/
 
 ENV PHP_IDE_CONFIG="serverName=phpproject"
