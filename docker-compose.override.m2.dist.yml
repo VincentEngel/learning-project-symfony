@@ -7,6 +7,15 @@ services:
     volumes:
       - db:/var/lib/mysql:rw
 
+  kafka:
+    volumes:
+      - kafka:/bitnami/kafka
+
+  rabbitMq:
+    volumes:
+      - rabbitMq:/var/lib/rabbitmq/mnesia/
+
 volumes:
   db:
   kafka:
+  rabbitMq:

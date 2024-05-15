@@ -46,3 +46,7 @@ Create a topic
 
 # Google Protobuf
 protoc --php_out=gprotobuf src/Shared/Port/Gprotobuf/post.proto
+
+# RabbitMQ
+http://localhost:15672/
+guest:guest

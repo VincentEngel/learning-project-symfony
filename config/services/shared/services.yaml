@@ -37,3 +37,7 @@ services:
     factory: [ '@App\Shared\Port\Kafka\ProducerFactory', 'create' ]
     arguments:
       $conf: '@RdKafka\Conf'
+
+  App\Shared\Port\Cli\StartKafkaConsumer:
+    arguments:
+      $kafkaConsumers: !tagged_iterator { tag: consumer.kafka, index_by: topic }

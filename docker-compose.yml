@@ -55,6 +55,13 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: kafka:9092
 
+  rabbitMq:
+    image: rabbitmq:3.12.14-management-alpine
+    ports:
+      - "15672:15672"
+    volumes:
+      - ./var/rabbitmq:/var/lib/rabbitmq/mnesia/
+
 networks:
   default:
     name: lps
