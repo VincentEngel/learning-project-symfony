@@ -12,14 +12,23 @@ framework:
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            async_commands:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    exchange:
+                        name: commands
+                        type: direct
+                        default_publish_routing_key: default
+                    queues:
+                        command.default: { binding_keys: [ default ] }
+                        command.post.export: { binding_keys: [ post.export ] }
+
             failed: 'doctrine://default?queue_name=failed'
             sync: 'sync://'
 
         routing:
             # Route your messages to the transports
-            'App\Post\Application\UseCase\ExportPost\ExportPostCommand': async
-            # 'App\Message\YourMessage': async
+            'App\Post\Application\UseCase\ExportPost\ExportPostCommand': async_commands
 
 when@test:
     framework:

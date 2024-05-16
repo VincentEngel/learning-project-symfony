@@ -6,9 +6,9 @@ namespace App\Post\Application\UseCase\GetPost;
 
 use App\Post\Application\UseCase\Shared\PostDto;
 use App\Post\Domain\Entity\Post as DomainEntityPost;
-use App\Shared\Application\Bus\Query\QueryResponse;
+use App\Shared\Application\Bus\Query\QueryResponseInterface;
 
-final readonly class GetPostQueryResponse implements QueryResponse
+final readonly class GetPostQueryResponse implements QueryResponseInterface
 {
     public function __construct(public PostDto $post)
     {

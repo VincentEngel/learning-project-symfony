@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Post\Application\UseCase\ListThread;
 
 use App\Post\Domain\Entity\PostId;
-use App\Shared\Application\Bus\Query\QueryHandler;
+use App\Shared\Application\Bus\Query\QueryHandlerInterface;
 
-final readonly class ListThreadQueryHandler implements QueryHandler
+final readonly class ListThreadQueryHandler implements QueryHandlerInterface
 {
     public function __construct(private ListThread $listThread)
     {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Post\Application\UseCase\ListPosts;
 
-use App\Shared\Application\Bus\Query\Query;
+use App\Shared\Application\Bus\Query\QueryInterface;
 
-final readonly class ListPostsQuery implements Query
+final readonly class ListPostsQuery implements QueryInterface
 {
 }

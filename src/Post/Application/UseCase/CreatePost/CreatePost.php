@@ -8,11 +8,11 @@ use App\Post\Domain\Entity\Post;
 use App\Post\Domain\Entity\PostContent;
 use App\Post\Domain\Entity\PostId;
 use App\Post\Domain\Repository\PostRepository;
-use App\Shared\Application\Bus\Event\EventBus;
+use App\Shared\Application\Bus\Event\EventBusInterface;
 
 final readonly class CreatePost
 {
-    public function __construct(private PostRepository $postRepository, private EventBus $eventBus)
+    public function __construct(private PostRepository $postRepository, private EventBusInterface $eventBus)
     {
     }
     public function __invoke(

@@ -6,9 +6,9 @@ namespace App\Post\Application\UseCase\GetPost;
 
 use App\Post\Domain\Entity\Post;
 use App\Post\Domain\Entity\PostId;
-use App\Shared\Application\Bus\Query\QueryHandler;
+use App\Shared\Application\Bus\Query\QueryHandlerInterface;
 
-final readonly class GetPostQueryHandler implements QueryHandler
+final readonly class GetPostQueryHandler implements QueryHandlerInterface
 {
     public function __construct(private GetPost $getPost)
     {

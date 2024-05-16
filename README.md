@@ -50,3 +50,6 @@ protoc --php_out=gprotobuf src/Shared/Port/Gprotobuf/post.proto
 # RabbitMQ
 http://localhost:15672/
 guest:guest
+
+# Consume async commands
+php bin/console messenger:consume async_commands --queues=command.post.export -vv

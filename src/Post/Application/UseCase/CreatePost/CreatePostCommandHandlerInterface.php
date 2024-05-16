@@ -6,9 +6,9 @@ namespace App\Post\Application\UseCase\CreatePost;
 
 use App\Post\Domain\Entity\PostContent;
 use App\Post\Domain\Entity\PostId;
-use App\Shared\Application\Bus\Command\CommandHandler;
+use App\Shared\Application\Bus\Command\CommandHandlerInterface;
 
-final readonly class CreatePostCommandHandler implements CommandHandler
+final readonly class CreatePostCommandHandlerInterface implements CommandHandlerInterface
 {
     public function __construct(private CreatePost $createPost)
     {

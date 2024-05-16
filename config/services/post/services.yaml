@@ -16,15 +16,15 @@ services:
       - '%kernel.project_dir%/src/Post/**/*Dto.php'
 
   _instanceof:
-    App\Shared\Application\Bus\Command\CommandHandler:
+    App\Shared\Application\Bus\Command\CommandHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: command.bus }
 
-    App\Shared\Application\Bus\Query\QueryHandler:
+    App\Shared\Application\Bus\Query\QueryHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: query.bus }
 
-    App\Shared\Application\Bus\Event\DomainEventSubscriber:
+    App\Shared\Application\Bus\Event\DomainEventSubscriberInterface:
       tags:
         - { name: messenger.message_handler, bus: sync.event.bus }
 

@@ -6,7 +6,7 @@ namespace App\Post\Application\UseCase\CreatePost;
 
 use App\Shared\Application\Bus\Command\Command;
 
-final class CreatePostCommand implements Command
+final class CreatePostCommand extends Command
 {
     /**
      * $id is a "hack" to return the created post id

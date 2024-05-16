@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Shared\Port\Bus\Query;
 
-use App\Shared\Application\Bus\Query\Query;
-use App\Shared\Application\Bus\Query\QueryBus;
-use App\Shared\Application\Bus\Query\QueryResponse;
+use App\Shared\Application\Bus\Query\QueryInterface;
+use App\Shared\Application\Bus\Query\QueryBusInterface;
+use App\Shared\Application\Bus\Query\QueryResponseInterface;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class SymfonyQueryBus implements QueryBus
+class SymfonyQueryBus implements QueryBusInterface
 {
     use HandleTrait; // Using trait because ->handle() returns mixed
 
@@ -19,7 +19,7 @@ class SymfonyQueryBus implements QueryBus
         $this->messageBus = $messageBus;
     }
 
-    public function ask(Query $query): QueryResponse
+    public function ask(QueryInterface $query): QueryResponseInterface
     {
         return $this->handle($query);
     }

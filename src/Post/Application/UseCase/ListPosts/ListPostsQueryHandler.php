@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Post\Application\UseCase\ListPosts;
 
-use App\Shared\Application\Bus\Query\QueryHandler;
+use App\Shared\Application\Bus\Query\QueryHandlerInterface;
 
-final readonly class ListPostsQueryHandler implements QueryHandler
+final readonly class ListPostsQueryHandler implements QueryHandlerInterface
 {
     public function __construct(private ListPosts $listPosts)
     {

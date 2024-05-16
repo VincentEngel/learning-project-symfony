@@ -6,7 +6,7 @@ namespace App\Post\Port\Api\Controller;
 
 use App\Post\Application\UseCase\GetPost\GetPostQuery;
 use App\Post\Application\UseCase\GetPost\GetPostQueryResponse;
-use App\Shared\Application\Bus\Query\QueryBus;
+use App\Shared\Application\Bus\Query\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class GetPostController extends AbstractController
 {
     #[Route('/api/post/get', name: 'api.post.get', methods: ['GET'])]
-    public function getPost(QueryBus $queryBus): Response
+    public function getPost(QueryBusInterface $queryBus): Response
     {
         /** @var GetPostQueryResponse $response */
         $response = $queryBus->ask(new GetPostQuery(id: 'some_uuid'));

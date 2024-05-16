@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace App\Shared\Port\Bus\Command;
 
-use App\Shared\Application\Bus\Command\Command;
-use App\Shared\Application\Bus\Command\CommandBus;
+use App\Shared\Application\Bus\Command\CommandInterface;
+use App\Shared\Application\Bus\Command\CommandBusInterface;
+use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-readonly class SymfonyCommandBus implements CommandBus
+readonly class SymfonyCommandBus implements CommandBusInterface
 {
     public function __construct(private MessageBusInterface $messageBus)
     {
     }
 
-    public function dispatch(Command $command): void
+    public function dispatch(CommandInterface $command): void
     {
-        $this->messageBus->dispatch($command);
+        $envelope = new Envelope($command, [new AmqpStamp($command::getQueueName())]);
+        $this->messageBus->dispatch($envelope);
     }
 }

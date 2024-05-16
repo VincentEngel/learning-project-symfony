@@ -6,7 +6,7 @@ namespace App\Shared\Application\Bus\Event;
 
 use App\Shared\Domain\Events\DomainEvent;
 
-interface EventBus
+interface EventBusInterface
 {
     public function publish(DomainEvent ...$events): void;
 }

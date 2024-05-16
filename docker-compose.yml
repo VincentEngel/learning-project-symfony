@@ -58,6 +58,7 @@ services:
   rabbitMq:
     image: rabbitmq:3.12.14-management-alpine
     ports:
+      - "5672:5672"
       - "15672:15672"
     volumes:
       - ./var/rabbitmq:/var/lib/rabbitmq/mnesia/

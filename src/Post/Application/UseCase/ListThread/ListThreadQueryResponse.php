@@ -6,9 +6,9 @@ namespace App\Post\Application\UseCase\ListThread;
 
 use App\Post\Application\UseCase\Shared\PostDto;
 use App\Post\Domain\Entity\Post as DomainEntityPost;
-use App\Shared\Application\Bus\Query\QueryResponse;
+use App\Shared\Application\Bus\Query\QueryResponseInterface;
 
-final readonly class ListThreadQueryResponse implements QueryResponse
+final readonly class ListThreadQueryResponse implements QueryResponseInterface
 {
     /**
      * @param PostDto[] $posts

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Post\Application\UseCase\ExportPost;
 
 use App\Post\Domain\Entity\PostId;
-use App\Shared\Application\Bus\Command\CommandHandler;
+use App\Shared\Application\Bus\Command\CommandHandlerInterface;
 use App\Shared\Domain\Enums\DomainEntityEvents;
 
-final readonly class ExportPostCommandHandler implements CommandHandler
+final readonly class ExportPostCommandHandler implements CommandHandlerInterface
 {
     public function __construct(private ExportPost $postCreated)
     {
