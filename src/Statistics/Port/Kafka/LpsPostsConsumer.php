@@ -28,6 +28,9 @@ final readonly class LpsPostsConsumer extends Consumer
     {
         echo "Processing message\n";
         $post = new GpPost();
+
+        // See \App\Post\Application\UseCase\ExportPost\ExportPost::__invoke
+        //$post->mergeFromString($kafkaMessage->payload);
         $post->mergeFromJsonString($kafkaMessage->payload);
 
         var_dump($post);
