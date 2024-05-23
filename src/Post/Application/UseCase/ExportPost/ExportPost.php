@@ -26,6 +26,7 @@ final readonly class ExportPost
             event: $event,
         );
 
+        // use $post->serializeToString() for smaller payload
         $this->publisher->publish(new Message($post->serializeToJsonString()));
     }
 }
