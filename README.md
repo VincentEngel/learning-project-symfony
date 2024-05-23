@@ -28,11 +28,6 @@ https://github.com/vimeo/psalm/
 
 php vendor/bin/psalm
 
-# PHPStan
-https://github.com/phpstan/phpstan
-
-php vendor/bin/phpstan analyse src tests
-
 # PHP Unit
 https://github.com/sebastianbergmann/phpunit/
 

@@ -15,11 +15,6 @@ docker-compose.override.yml
 /.phpcs-cache
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
-
-###> phpstan/phpstan ###
-phpstan.neon
-###< phpstan/phpstan ###
-
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache

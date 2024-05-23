@@ -1,0 +1,25 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  code-quality:
+    desc: 'Execute all code quality checks'
+    cmds:
+      - task: phpcbf
+      - task: psalm
+
+  phpcs:
+    cmds:
+      - docker compose exec php php vendor/bin/phpcs -p
+
+  phpcbf:
+    cmds:
+      - docker compose exec php php vendor/bin/phpcbf -p
+
+  psalm:
+    cmds:
+      - docker compose exec php php vendor/bin/psalm
