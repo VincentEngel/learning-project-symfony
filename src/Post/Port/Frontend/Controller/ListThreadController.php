@@ -25,14 +25,13 @@ class ListThreadController extends AbstractController
             '@post/thread_show.html.twig',
             [
                 'posts' => array_map(
-                    fn (PostDto $post) =>
-                    [
+                    fn (PostDto $post) => [
                         'id' => $post->id,
                         'content' => $post->content,
                         'parentPostId' => $post->parentPostId,
                     ],
                     $response->posts
-                )
+                ),
             ]
         );
     }

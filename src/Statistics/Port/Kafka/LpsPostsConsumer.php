@@ -11,7 +11,7 @@ use RdKafka\Message;
 
 final readonly class LpsPostsConsumer extends Consumer
 {
-    public function __construct(KafkaConsumer $consumer, string $topicName,)
+    public function __construct(KafkaConsumer $consumer, string $topicName)
     {
         parent::__construct(consumer: $consumer, topicName: $topicName);
     }
@@ -30,7 +30,7 @@ final readonly class LpsPostsConsumer extends Consumer
         $post = new GpPost();
 
         // See \App\Post\Application\UseCase\ExportPost\ExportPost::__invoke
-        //$post->mergeFromString($kafkaMessage->payload);
+        // $post->mergeFromString($kafkaMessage->payload);
         $post->mergeFromJsonString($kafkaMessage->payload);
 
         var_dump($post);

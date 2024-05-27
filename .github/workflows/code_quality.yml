@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Task
+        uses: arduino/setup-task@v2
+
       - name: Pre Build # Image should be created and pushed before any other workflow and then be re-used
         run: cp internal/php/custom.php.ini.dist internal/php/custom.php.ini
 
@@ -23,7 +26,7 @@ jobs:
         run: docker compose exec -it php composer install
 
       - name: PHPCS
-        run: docker compose exec -it php php vendor/bin/phpcs --ignore=*/Migrations/* -p src tests
+        run: task phpcs
 
       - name: Stop docker images
         run: docker compose down

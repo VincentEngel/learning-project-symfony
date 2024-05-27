@@ -10,6 +10,7 @@ use App\Post\Domain\Entity\PostId;
 interface PostRepository
 {
     public function save(Post $post): void;
+
     public function findByPostId(PostId $postId): ?Post;
 
     /**

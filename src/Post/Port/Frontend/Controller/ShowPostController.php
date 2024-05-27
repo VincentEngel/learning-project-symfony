@@ -22,11 +22,11 @@ class ShowPostController extends AbstractController
         $post = $response->post;
 
         return $this->render('@post/post_show.html.twig', [
-                'post' => [
-                    'id' => $post->id,
-                    'content' => $post->content,
-                    'parentPostId' => $post->parentPostId,
-                ],
-            ]);
+            'post' => [
+                'id' => $post->id,
+                'content' => $post->content,
+                'parentPostId' => $post->parentPostId,
+            ],
+        ]);
     }
 }

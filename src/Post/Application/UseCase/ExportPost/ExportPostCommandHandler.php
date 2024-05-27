@@ -13,6 +13,7 @@ final readonly class ExportPostCommandHandler implements CommandHandlerInterface
     public function __construct(private ExportPost $postCreated)
     {
     }
+
     public function __invoke(ExportPostCommand $command): void
     {
         $this->postCreated->__invoke(

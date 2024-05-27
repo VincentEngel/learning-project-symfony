@@ -24,13 +24,12 @@ class ListPostsController extends AbstractController
             '@post/list_posts.html.twig',
             [
                 'posts' => array_map(
-                    fn (PostDto $post) =>
-                        [
-                            'id' => $post->id,
-                            'content' => $post->content,
-                        ],
+                    fn (PostDto $post) => [
+                        'id' => $post->id,
+                        'content' => $post->content,
+                    ],
                     $response->posts
-                )
+                ),
             ]
         );
     }

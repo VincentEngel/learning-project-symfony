@@ -15,6 +15,7 @@ final readonly class CreatePost
     public function __construct(private PostRepository $postRepository, private EventBusInterface $eventBus)
     {
     }
+
     public function __invoke(
         PostContent $content,
         ?PostId $parentPostId = null,

@@ -20,6 +20,7 @@ final readonly class ExportPostConverter
         }
 
         $gpPost->setEvent(GpPost\Event::value($event->value));
+
         return $gpPost;
     }
 }

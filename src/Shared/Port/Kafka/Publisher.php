@@ -13,6 +13,7 @@ use RdKafka\ProducerTopic;
 final readonly class Publisher implements PublisherInterface
 {
     private ProducerTopic $topic;
+
     public function __construct(
         private Producer $producer,
         private string $topicName,
@@ -33,7 +34,7 @@ final readonly class Publisher implements PublisherInterface
 
         foreach ($messageGenerator->messages() as $message) {
             $this->produce($message);
-            $count++;
+            ++$count;
 
             if ($count >= $flushLimit) {
                 $count = 0;

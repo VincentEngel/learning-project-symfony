@@ -9,7 +9,7 @@ use RdKafka\Message;
 
 abstract readonly class Consumer
 {
-    public function __construct(protected KafkaConsumer $consumer, protected string $topicName,)
+    public function __construct(protected KafkaConsumer $consumer, protected string $topicName)
     {
         $this->consumer->subscribe([$this->topicName]);
     }
@@ -40,22 +40,27 @@ abstract readonly class Consumer
     }
 
     abstract protected function start(): void;
+
     abstract protected function preConsume(): void;
+
     abstract protected function process(Message $kafkaMessage): void;
+
     abstract protected function postConsume(): void;
+
     abstract protected function finish(): void;
+
     protected function isError(Message $message): bool
     {
-        return $message->err !== RD_KAFKA_RESP_ERR_NO_ERROR;
+        return RD_KAFKA_RESP_ERR_NO_ERROR !== $message->err;
     }
 
     protected function isErrorSkippable(Message $message): bool
     {
-        if ($message->err === RD_KAFKA_RESP_ERR__TIMED_OUT) {
+        if (RD_KAFKA_RESP_ERR__TIMED_OUT === $message->err) {
             return true;
         }
 
-        if ($message->err === RD_KAFKA_RESP_ERR__PARTITION_EOF) {
+        if (RD_KAFKA_RESP_ERR__PARTITION_EOF === $message->err) {
             return true;
         }
 

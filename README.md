@@ -16,17 +16,18 @@ In order to debug tests and cli commands prefix your request with XDEBUG_TRIGGER
 
 e.g. XDEBUG_TRIGGER=yes php bin/phpunit
 
+# SSH
+`task ssh`
 
-# PHP Code Sniffer and Beautifier
-https://github.com/PHPCSStandards/PHP_CodeSniffer/
+# PHP CS Fixer
+https://github.com/PHP-CS-Fixer/PHP-CS-Fixer
 
-1. php vendor/bin/phpcs -p
-2. php vendor/bin/phpcbf -p
+`task phpcs`
 
 # Psalm
 https://github.com/vimeo/psalm/
 
-php vendor/bin/psalm
+`task psalm`
 
 # PHP Unit
 https://github.com/sebastianbergmann/phpunit/

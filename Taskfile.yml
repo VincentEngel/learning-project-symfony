@@ -6,6 +6,10 @@ vars:
   GREETING: Hello, World!
 
 tasks:
+  ssh:
+    cmds:
+      - docker compose exec -it php bash
+
   code-quality:
     desc: 'Execute all code quality checks'
     cmds:
@@ -14,11 +18,7 @@ tasks:
 
   phpcs:
     cmds:
-      - docker compose exec php php vendor/bin/phpcs -p
-
-  phpcbf:
-    cmds:
-      - docker compose exec php php vendor/bin/phpcbf -p
+      - docker compose exec php php vendor/bin/php-cs-fixer fix -vvv
 
   psalm:
     cmds:

@@ -27,13 +27,12 @@ class CreatePostController extends AbstractController
             '@post/post_create_form.html.twig',
             [
                 'posts' => array_map(
-                    fn (PostDto $post) =>
-                    [
+                    fn (PostDto $post) => [
                         'id' => $post->id,
                         'content' => $post->content,
                     ],
                     $response->posts
-                )
+                ),
             ]
         );
     }
@@ -43,7 +42,7 @@ class CreatePostController extends AbstractController
     {
         $command = new CreatePostCommand(
             content: $request->getPayload()->get('content'),
-            parentPostId: $request->getPayload()->get('parent_post_id') !== ""
+            parentPostId: '' !== $request->getPayload()->get('parent_post_id')
                 ? $request->getPayload()->get('parent_post_id') : null
         );
 

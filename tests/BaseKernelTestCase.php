@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class BaseKernelTestCase extends KernelTestCase
 {
     protected Connection $connection;
+
     protected function setUp(): void
     {
         parent::setUp();

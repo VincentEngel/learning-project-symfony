@@ -13,6 +13,7 @@ use Doctrine\DBAL\Connection;
 class MysqlPostRepository implements PostRepository
 {
     public const string TABLE_NAME = 'posts';
+
     public function __construct(private readonly Connection $connection)
     {
     }
@@ -46,7 +47,7 @@ class MysqlPostRepository implements PostRepository
             ->where('id = :id')
             ->setParameter('id', $postId->toPrimitive());
         $result = $queryBuilder->executeQuery()->fetchAssociative();
-        if ($result === false) {
+        if (false === $result) {
             return null;
         }
 
@@ -74,7 +75,6 @@ class MysqlPostRepository implements PostRepository
 
     public function findThreadByPostId(PostId $postId): array
     {
-
         $result = $this->connection->executeQuery(
             '
             WITH RECURSIVE parents AS (
@@ -115,7 +115,7 @@ class MysqlPostRepository implements PostRepository
         return new Post(
             id: new PostId($postValues['id']),
             content: new PostContent($postValues['content']),
-            parentPostId: $postValues['parent_post_id'] !== null ? new PostId($postValues['parent_post_id']) : null,
+            parentPostId: null !== $postValues['parent_post_id'] ? new PostId($postValues['parent_post_id']) : null,
         );
     }
 }

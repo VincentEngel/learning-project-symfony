@@ -18,7 +18,7 @@ final readonly class CreatePostCommandHandlerInterface implements CommandHandler
     {
         $post = $this->createPost->__invoke(
             content: new PostContent($command->content),
-            parentPostId: $command->parentPostId !== null ? new PostId($command->parentPostId) : null
+            parentPostId: null !== $command->parentPostId ? new PostId($command->parentPostId) : null
         );
 
         // Can be avoided if the command passes an id instead

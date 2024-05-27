@@ -15,16 +15,16 @@ final class Version20240506151904 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add parent_post_id to ' . MysqlPostRepository::TABLE_NAME . ' table';
+        return 'Add parent_post_id to '.MysqlPostRepository::TABLE_NAME.' table';
     }
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE ' . MysqlPostRepository::TABLE_NAME . ' ADD parent_post_id CHAR(36) DEFAULT NULL');
+        $this->addSql('ALTER TABLE '.MysqlPostRepository::TABLE_NAME.' ADD parent_post_id CHAR(36) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE ' . MysqlPostRepository::TABLE_NAME . ' DROP parent_post_id');
+        $this->addSql('ALTER TABLE '.MysqlPostRepository::TABLE_NAME.' DROP parent_post_id');
     }
 }
