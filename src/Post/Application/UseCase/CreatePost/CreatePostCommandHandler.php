@@ -8,7 +8,7 @@ use App\Post\Domain\Entity\PostContent;
 use App\Post\Domain\Entity\PostId;
 use App\Shared\Application\Bus\Command\CommandHandlerInterface;
 
-final readonly class CreatePostCommandHandlerInterface implements CommandHandlerInterface
+final readonly class CreatePostCommandHandler implements CommandHandlerInterface
 {
     public function __construct(private CreatePost $createPost)
     {

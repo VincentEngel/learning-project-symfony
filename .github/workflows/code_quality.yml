@@ -25,7 +25,7 @@ jobs:
       - name: Install Dependencies
         run: docker compose exec -it php composer install
 
-      - name: PHPCS
+      - name: PHP-CS-Fixer
         run: task phpcs
 
       - name: Stop docker images

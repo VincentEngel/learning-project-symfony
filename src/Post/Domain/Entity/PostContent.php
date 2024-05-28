@@ -9,12 +9,18 @@ use App\Shared\Domain\ValueObject\StringValueObject;
 
 final readonly class PostContent extends StringValueObject
 {
+    /**
+     * @throws InvalidPostContentException
+     */
     public function __construct(string $content)
     {
         self::guardAgainstEmptyContent($content);
         parent::__construct($content);
     }
 
+    /**
+     * @throws InvalidPostContentException
+     */
     private static function guardAgainstEmptyContent(string $content): void
     {
         if (empty($content)) {

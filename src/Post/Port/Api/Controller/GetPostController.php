@@ -13,15 +13,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class GetPostController extends AbstractController
 {
-    #[Route('/api/post/get', name: 'api.post.get', methods: ['GET'])]
-    public function getPost(QueryBusInterface $queryBus): Response
+    #[Route('/api/post/{postId}', name: 'api.post.get', methods: ['GET'])]
+    public function getPost(QueryBusInterface $queryBus, string $postId): Response
     {
         /** @var GetPostQueryResponse $response */
-        $response = $queryBus->ask(new GetPostQuery(id: 'some_uuid'));
+        $response = $queryBus->ask(new GetPostQuery(id: $postId));
 
         return $this->json([
-            'id' => $response->id,
-            'content' => $response->content,
+            'id' => $response->post->id,
+            'content' => $response->post->content,
+            'parent_post_id' => $response->post->parentPostId,
         ]);
     }
 }

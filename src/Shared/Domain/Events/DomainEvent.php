@@ -8,8 +8,8 @@ use Symfony\Component\Uid\Uuid as SymfonyUuid;
 
 abstract readonly class DomainEvent
 {
-    public string $eventId;
     // Pass along the previous event id so that we can track the event flow
+    public string $eventId;
     public string $occurredOn;
 
     public function __construct(public string $aggregateId, ?string $eventId = null, ?string $occurredOn = null)
