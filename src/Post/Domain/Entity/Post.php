@@ -6,18 +6,22 @@ namespace App\Post\Domain\Entity;
 
 use App\Post\Domain\Events\PostCreatedEvent;
 use App\Shared\Domain\Aggregate\AggregateRoot;
+use App\Shared\Domain\Exceptions\InvalidUuidException;
 use App\Shared\Domain\ValueObject\Uuid;
 
 final class Post extends AggregateRoot
 {
     public function __construct(
-        private PostId $id,
+        private readonly PostId $id,
         private PostContent $content,
         private ?PostId $parentPostId = null,
     ) {
         $this->record(new PostCreatedEvent($this->id->toPrimitive()));
     }
 
+    /**
+     * @throws InvalidUuidException
+     */
     public static function createFromUserInput(
         PostContent $content,
         ?PostId $parentPostId = null,

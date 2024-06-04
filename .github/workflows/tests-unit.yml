@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Task
+        uses: arduino/setup-task@v2
+
       - name: Pre Build # Image should be created and pushed before any other workflow and then be re-used
         run: |
           cp internal/php/custom.php.ini.dist internal/php/custom.php.ini
@@ -28,7 +31,7 @@ jobs:
         run: docker compose exec -it php php bin/console cache:clear --env=test
 
       - name: Run Unit Tests
-        run: docker compose exec -it php php bin/phpunit --testdox tests/Unit
+        run: task tests-unit
 
       - name: Stop docker images
         run: docker compose down

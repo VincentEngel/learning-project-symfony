@@ -23,3 +23,21 @@ tasks:
   psalm:
     cmds:
       - docker compose exec php php vendor/bin/psalm
+
+  protobuf:
+    cmds:
+      - docker compose exec php protoc --php_out=gprotobuf src/Shared/Port/Gprotobuf/post.proto
+
+  tests-unit:
+    cmds:
+      - docker compose exec php php vendor/bin/phpunit --testdox tests/Unit
+
+  tests-integration:
+    cmds:
+      - docker compose exec php php vendor/bin/phpunit --testdox tests/Integration
+
+  tests:
+    desc: 'Execute all tests'
+    cmds:
+      - task: tests-unit
+      - task: tests-integration

@@ -9,6 +9,9 @@ use Symfony\Component\Uid\Uuid as SymfonyUuid;
 
 readonly class Uuid extends StringValueObject
 {
+    /**
+     * @throws InvalidUuidException
+     */
     public function __construct(string $content)
     {
         self::guardAgainstInvalidUuid($content);
@@ -25,6 +28,9 @@ readonly class Uuid extends StringValueObject
         return new self(SymfonyUuid::v4()->toRfc4122());
     }
 
+    /**
+     * @throws InvalidUuidException
+     */
     public function guardAgainstInvalidUuid(string $value): void
     {
         if (!SymfonyUuid::isValid($value)) {

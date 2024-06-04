@@ -32,8 +32,9 @@ https://github.com/vimeo/psalm/
 # PHP Unit
 https://github.com/sebastianbergmann/phpunit/
 
-1. APP_ENV=test vendor/bin/phpunit --testdox tests/Unit
-2. APP_ENV=test vendor/bin/phpunit --testdox tests/Integration
+1. `task tests`
+2. `task tests-unit`
+3. `task tests-integration`
 
 # Kafka
 Create a topic
@@ -41,7 +42,7 @@ Create a topic
 2. /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
 
 # Google Protobuf
-protoc --php_out=gprotobuf src/Shared/Port/Gprotobuf/post.proto
+`task protobuf`
 
 # RabbitMQ
 http://localhost:15672/
